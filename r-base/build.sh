@@ -41,9 +41,5 @@ make -j${CPU_COUNT}
 make install
 
 ACTIVATE_DIR=$PREFIX/etc/conda/activate.d
-DEACTIVATE_DIR=$PREFIX/etc/conda/deactivate.d
 mkdir -p $ACTIVATE_DIR
-mkdir -p $DEACTIVATE_DIR
-
-cp "${RECIPE_DIR}"/activate-${PKG_NAME}.sh ${PREFIX}/etc/conda/activate.d/activate-${PKG_NAME}.sh
-cp "${RECIPE_DIR}"/deactivate-${PKG_NAME}.sh ${PREFIX}/etc/conda/deactivate.d/deactivate-${PKG_NAME}.sh
+cp "${RECIPE_DIR}"/activate.sh ${PREFIX}/etc/conda/activate.d/activate-${PKG_NAME}.sh
