@@ -1,6 +1,6 @@
 package:
   name: pydruid
-  version: "0.3.1"
+  version: 0.3.1
 
 source:
   fn: pydruid-0.3.1.tar.gz
@@ -8,27 +8,28 @@ source:
   md5: ef51c2f40e92000f3fd512f360d47981
 
 build:
-  script: pip install --no-deps .
+  number: 1
+  script: $PYTHON setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
     - python
+    - setuptools
     - mock
     - pytest
     - pytest-runner
-    - six ==1.10.0
+    - six
   run:
     - python
-    - six ==1.10.0
+    - setuptools
+    - six
 
 test:
-  # Python imports
   imports:
     - pydruid
     - pydruid.utils
 
 about:
   home: https://pypi.python.org/pypi/pydruid/
-  license: Apache License, Version 2.0
-  summary: 'A Python connector for Druid.'
-  license_family: APACHE
+  summary: A Python connector for Druid
+  license: Apache License 2.0
