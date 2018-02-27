@@ -8,15 +8,18 @@ source:
   md5: 801a19bc7fee2f5c2a89f254c51f61d6
 
 build:
-  script: pip install --no-deps .
+  number: 1
+  script: $PYTHON setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
     - python
-    - flask ==0.12.2
+    - setuptools
+    - flask >=0.12.2
   run:
     - python
-    - flask ==0.12.2
+    - setuptools
+    - flask >=0.12.2
 
 test:
   # Python imports
@@ -25,6 +28,6 @@ test:
 
 about:
   home: https://github.com/jarus/flask-testing
-  license: BSD License
-  summary: 'Unit testing for Flask'
-  license_family: BSD
+  summary: Unit testing for Flask
+  license: BSD
+  license_file: LICENSE
