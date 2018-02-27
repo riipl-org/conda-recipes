@@ -1,44 +1,47 @@
+{% set name = "kombu" %}
+{% set version = "4.1.0" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "4249d9dd9dbf1fcec471d1c2def20653c9310dd1a217272d77e4844f9d5273cb" %}
+
 package:
-  name: kombu
-  version: "3.0.37"
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
 
 source:
-  fn: kombu-3.0.37.tar.gz
-  url: https://pypi.python.org/packages/38/69/8d603be2df979f1b9ffefae1e51cde664c52a258aff6e8c3253032c8f2c8/kombu-3.0.37.tar.gz
-  md5: a1901036ba5e70e6b1733f7c2d5ee313
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
 
 build:
-  script: pip install --no-deps .
+  script: $PYTHON setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
     - python
-    - anyjson ==0.3.3
-    - amqp ==1.4.9
-    - sqlalchemy ==1.1.9
+    - setuptools
+    - amqp >=2.1.4,<3.0
+    - sqlalchemy
   run:
     - python
-    - anyjson ==0.3.3
-    - amqp ==1.4.9
-    - sqlalchemy ==1.1.9
+    - setuptools
+    - amqp >=2.1.4,<3.0
+    - sqlalchemy
 
 test:
-  # Python imports
   imports:
     - kombu
     - kombu.async
-    - kombu.tests
-    - kombu.tests.async
-    - kombu.tests.transport
-    - kombu.tests.transport.virtual
-    - kombu.tests.utils
+    - kombu.async.aws
+    - kombu.async.aws.sqs
+    - kombu.async.http
     - kombu.transport
     - kombu.transport.sqlalchemy
     - kombu.transport.virtual
     - kombu.utils
 
 about:
-  home: https://kombu.readthedocs.io
-  license: BSD License
-  summary: 'Messaging library for Python'
-  license_family: BSD
+  home: https://github.com/celery/kombu
+  summary: Messaging library for Python
+  license: BSD
+  license_file: LICENSE
