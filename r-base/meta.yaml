@@ -7,7 +7,7 @@ source:
   sha256: 7a3cb831de5b4151e1f890113ed207527b7d4b16df9ec6b35e0964170007f426
 
 build:
-  number: 1
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
@@ -29,33 +29,32 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
-    - bzip2
-    - curl
-    - gettext
-    - icu
-    - jpeg
+    - bzip2 ==1.0.6
+    - curl ==7.55.1
+    - gettext ==0.19.8.1
+    - icu ==58.2
+    - jpeg ==9b
     - libgcc-ng
-    - libpng
-    - libtiff
-    - libxml2
-    - mkl
-    - pcre
-    - readline
-    - zlib
+    - libpng ==1.6.32
+    - libtiff ==4.0.6
+    - libxml2 ==2.9.4
+    - mkl >=2018.0.1
+    - pcre ==8.41
+    - readline ==7.0
+    - zlib ==1.2.11
   run:
-    - bzip2
-    - curl
-    - gettext
-    - icu
-    - jpeg
-    - libgcc-ng
-    - libpng
-    - libtiff
-    - libxml2
-    - mkl
-    - pcre
-    - readline
-    - zlib
+    - bzip2 ==1.0.6
+    - curl ==7.55.1
+    - gettext ==0.19.8.1
+    - icu ==58.2
+    - jpeg ==9b
+    - libpng ==1.6.32
+    - libtiff ==4.0.6
+    - libxml2 ==2.9.4
+    - mkl >=2018.0.1
+    - pcre ==8.41
+    - readline ==7.0
+    - zlib ==1.2.11
 
 test:
   commands:

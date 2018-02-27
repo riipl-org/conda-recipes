@@ -1,8 +1,8 @@
 #!/bin/bash
-set -e
-
 mkdir build
 cd build
-
-cmake -DCMAKE_INSTALL_PREFIX=$PREFIX ..
+export CC=gcc
+export CXX=g++
+cmake .. -DCMAKE_INSTALL_PREFIX=$PREFIX
+make
 make install
