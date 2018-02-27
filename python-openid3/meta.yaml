@@ -1,0 +1,41 @@
+{% set name = "python-openid3" %}
+{% set version = "2.2.6" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "e5ab4495cc6b0ccb57afc0dc5acba41cd56ae8dfa2ed2cf0ebbb52b5f1d734dc" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  script: $PYTHON setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  host:
+    - python
+    - setuptools
+  run:
+    - python
+    - setuptools
+
+test:
+  imports:
+    - openid
+    - openid.consumer
+    - openid.extensions
+    - openid.extensions.draft
+    - openid.server
+    - openid.store
+    - openid.yadis
+
+about:
+  home: http://github.com/openid/python-openid
+  summary: OpenID support for servers and consumers. Python 3 support fork.
+  license: Apache License 2.0
+  license_file: LICENSE
