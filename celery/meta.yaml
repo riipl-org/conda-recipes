@@ -1,34 +1,38 @@
+{% set name = "celery" %}
+{% set version = "4.1.0" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "77ff3730198d6a17b3c1f05579ebe570b579efb35f6d7e13dba3b1368d068b35" %}
+
 package:
-  name: celery
-  version: "3.1.25"
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
 
 source:
-  fn: celery-3.1.25.tar.gz
-  url: https://pypi.python.org/packages/62/8d/5d9e8cddd987b409b9a332a5eb73c2d01ea42ab83865e8e8a011326c16dc/celery-3.1.25.tar.gz
-  md5: 81ebed2cccbc03c2d8adcba4fefac3bb
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
 
 build:
-  script: pip install --no-deps .
   entry_points:
     - celery = celery.__main__:main
-    - celeryd = celery.__main__:_compat_worker
-    - celerybeat = celery.__main__:_compat_beat
-    - celeryd-multi = celery.__main__:_compat_multi
+  script: $PYTHON setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
     - python
-    - pytz ==2017.3
-    - billiard ==3.3.0.23
-    - kombu ==3.0.37
+    - setuptools
+    - pytz >dev
+    - billiard >=3.5.0.2,<3.6.0
+    - kombu >=4.0.2,<5.0
   run:
     - python
-    - pytz ==2017.3
-    - billiard ==3.3.0.23
-    - kombu ==3.0.37
+    - setuptools
+    - pytz >dev
+    - billiard >=3.5.0.2,<3.6.0
+    - kombu >=4.0.2,<5.0
 
 test:
-  # Python imports
   imports:
     - celery
     - celery.app
@@ -38,35 +42,22 @@ test:
     - celery.bin
     - celery.concurrency
     - celery.contrib
+    - celery.contrib.testing
     - celery.events
     - celery.fixups
     - celery.loaders
     - celery.security
     - celery.task
-    - celery.tests
-    - celery.tests.app
-    - celery.tests.backends
-    - celery.tests.bin
-    - celery.tests.bin.proj
-    - celery.tests.compat_modules
-    - celery.tests.concurrency
-    - celery.tests.contrib
-    - celery.tests.events
-    - celery.tests.fixups
-    - celery.tests.functional
-    - celery.tests.security
-    - celery.tests.slow
-    - celery.tests.tasks
-    - celery.tests.utils
-    - celery.tests.worker
     - celery.utils
     - celery.utils.dispatch
+    - celery.utils.static
     - celery.worker
+    - celery.worker.consumer
   commands:
     - celery --version
 
 about:
   home: http://celeryproject.org
-  license: BSD License
-  summary: 'Distributed Task Queue'
-  license_family: BSD
+  summary: Distributed Task Queue
+  license: BSD
+  license_file: LICENSE
