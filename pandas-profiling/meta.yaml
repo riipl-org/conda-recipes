@@ -1,30 +1,29 @@
 package:
   name: pandas-profiling
-  version: "1.4.0"
+  version: 1.4.1
 
 source:
-  fn: pandas-profiling-1.4.0.tar.gz
-  url: https://pypi.python.org/packages/b8/91/62dfcd13b3cd773b4a319babd62d5931af6e9931bed142367e71ff0c5f9b/pandas-profiling-1.4.0.tar.gz
-  md5: f6cd816607a2627ddb586466f55d1b95
+  git_url: http://github.com/jospolfliet/pandas-profiling
+  git_tag: v1.4.1
 
 build:
-  script: pip install --no-deps .
-  number: 2
+  script: $PYTHON setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
-  build:
+  host:
     - python
-    - pandas ==0.20.3
-    - matplotlib ==2.0.2
-    - jinja2 ==2.9.6
-    - six ==1.10.0
-
+    - setuptools
+    - pandas
+    - matplotlib
+    - jinja2
+    - six
   run:
     - python
-    - pandas ==0.20.3
-    - matplotlib ==2.0.2
-    - jinja2 ==2.9.6
-    - six ==1.10.0
+    - setuptools
+    - pandas
+    - matplotlib
+    - jinja2
+    - six
 
 test:
   imports:
@@ -32,6 +31,6 @@ test:
 
 about:
   home: http://github.com/jospolfliet/pandas-profiling
-  license: MIT License
-  summary: 'Generate profile report for pandas DataFrame'
-  license_family: MIT
+  summary: Generate profile report for pandas DataFrame
+  license: MIT
+  license_file: LICENSE
