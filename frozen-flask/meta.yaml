@@ -1,0 +1,47 @@
+{% set name = "Frozen-Flask" %}
+{% set version = "0.15" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "83858d6ed8b9d3fa7fc9523e415e65fb86b99352798d7695f63cffbd59a56269" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - flask >=0.7
+  run:
+    - python
+    - flask >=0.7
+
+test:
+  imports:
+    - flask_frozen
+    - flask_frozen.test_app
+    - flask_frozen.test_app.admin
+
+about:
+  home: https://github.com/Frozen-Flask/Frozen-Flask
+  license: BSD License
+  license_family: BSD
+  license_file: ''
+  summary: Freezes a Flask application into a set of static files.
+  description: "\nFrozen-Flask\n------------\n\nFreezes a Flask application into a set of static files. The result can be hosted\nwithout any server-side software other than a traditional web server.\n\n\
+    Links\n`````\n\n* `documentation <http://pythonhosted.org/Frozen-Flask/>`_\n* `development version\n  <http://github.com/Frozen-Flask/Frozen-Flask/zipball/master#egg=Frozen-Flask-dev>`_\n\n\n"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''

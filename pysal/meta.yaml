@@ -1,0 +1,100 @@
+{% set name = "PySAL" %}
+{% set version = "1.14.3" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "e2145c5c5bdfa7c1989154037dba8385ede5aa21354e2d5278705ac902d06a31" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - scipy >=0.11
+    - numpy >=1.3
+
+  run:
+    - python
+    - scipy >=0.11
+    - numpy >=1.3
+
+test:
+  imports:
+    - pysal
+    - pysal.cg
+    - pysal.cg.tests
+    - pysal.contrib
+    - pysal.contrib.clusterpy
+    - pysal.contrib.geotable
+    - pysal.contrib.geotable.ops
+    - pysal.contrib.geotable.ops.tests
+    - pysal.contrib.geotable.tests
+    - pysal.contrib.glm
+    - pysal.contrib.gwr
+    - pysal.contrib.handler
+    - pysal.contrib.network
+    - pysal.contrib.opendata
+    - pysal.contrib.pdio
+    - pysal.contrib.spatialnet
+    - pysal.contrib.spint
+    - pysal.contrib.viz
+    - pysal.contrib.weights_viewer
+    - pysal.core
+    - pysal.core.IOHandlers
+    - pysal.core.IOHandlers.tests
+    - pysal.core.tests
+    - pysal.core.util
+    - pysal.esda
+    - pysal.esda.tests
+    - pysal.examples
+    - pysal.inequality
+    - pysal.inequality.tests
+    - pysal.network
+    - pysal.network.tests
+    - pysal.region
+    - pysal.region.tests
+    - pysal.spatial_dynamics
+    - pysal.spatial_dynamics.tests
+    - pysal.spreg
+    - pysal.weights
+  requires:
+    - nose
+    - pandas >=0.20.2
+
+about:
+  home: http://pysal.org
+  license: BSD License
+  license_family: BSD
+  license_file: ''
+  summary: A library of spatial analysis functions.
+  description: "Python Spatial Analysis Library\n=================================\n\n.. image:: https://travis-ci.org/pysal/pysal.svg\n   :target: https://travis-ci.org/pysal\n\n.. image:: https://coveralls.io/repos/pysal/pysal/badge.svg?branch=master\n\
+    \   :target: https://coveralls.io/r/pysal/pysal?branch=master\n\n.. image:: https://badges.gitter.im/pysal/pysal.svg\n   :target: https://gitter.im/pysal/pysal\n\n.. image:: https://readthedocs.org/projects/pip/badge/?version=latest\n\
+    \   :target: http://pysal.readthedocs.io/en/latest/index.html\n\n\nPySAL_ is an open source cross-platform library of spatial analysis functions\nwritten in Python. It is intended to support the development\
+    \ of high level\napplications for spatial analysis.\n\n.. image:: https://farm2.staticflickr.com/1699/23937788493_1b9d147b9f_z.jpg\n        :width: 25%\n        :scale: 25%\n        :target: http://nbviewer.ipython.org/urls/gist.githubusercontent.com/darribas/657e0568df7a63362762/raw/pysal_lisa_maps.ipynb\n\
+    \        :alt: LISA Maps of US County Homicide Rates\n\n*Above: Local Indicators of Spatial Association for Homicide Rates in US\nCounties 1990.*\n\n\nPySAL modules\n=============\n\n* pysal.cg  Computational\
+    \ geometry\n* pysal.contrib  Contributed modules\n* pysal.core  Core data structures and IO\n* pysal.esda  Exploratory spatial data analysis\n* pysal.examples  Data sets\n* pysal.inequality  Spatial\
+    \ inequality analysis\n* pysal.network  Spatial analysis on networks\n* pysal.region  Spatially constrained clustering\n* pysal.spatial_dynamics  Spatial dynamics\n* pysal.spreg  Spatial econometrics\
+    \ and diagnostics\n* pysal.weights  Spatial weights\n\n\nInstallation\n============\n\nPySAL can be installed using pip:\n\n.. code-block:: bash\n\n    $ pip install pysal\n\nPySAL is also available\
+    \ through\n`Anaconda <https://www.continuum.io/downloads>`__ and `Enthought Canopy <https://www.enthought.com/products/canopy/>`__.\n\nDocumentation\n=============\n\nFor help on using PySAL, check\
+    \ out the following resources:\n\n* `User Guide <http://pysal.readthedocs.org/en/latest/users/index.html>`_\n* `Tutorials and Short Courses <https://github.com/pysal/notebooks/blob/master/courses.md>`_\n\
+    * `Notebooks <https://github.com/pysal/notebooks>`_\n* `User List <http://groups.google.com/group/openspace-list>`_\n\n\n\nDevelopment\n===========\n\nPySAL development is hosted on github_.\n\n.. _github\
+    \ : https://github.com/pysal/pysal\n\nDiscussions of development occurs on the\n`developer list <http://groups.google.com/group/pysal-dev>`_\nas well as gitter_.\n\n.. _gitter : https://gitter.im/pysal/pysal?\n\
+    \nGetting Involved\n================\n\nIf you are interested in contributing to PySAL please see our\n`development guidelines <http://pysal.readthedocs.org/en/latest/developers/index.html>`_.\n\n\n\
+    Bug reports\n===========\nTo search for or report bugs, please see PySAL's issues_.\n\n.. _issues :  http://github.com/pysal/pysal/issues\n\nLicense information\n===================\n\nSee the file\
+    \ \"LICENSE.txt\" for information on the history of this\nsoftware, terms & conditions for usage, and a DISCLAIMER OF ALL\nWARRANTIES.\n"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
