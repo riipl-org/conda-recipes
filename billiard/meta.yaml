@@ -1,32 +1,36 @@
+{% set name = "billiard" %}
+{% set version = "3.5.0.3" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "1d7b22bdc47aa52841120fcd22a74ae4fc8c13e9d3935643098184f5788c3ce6" %}
+
 package:
-  name: billiard
-  version: "3.3.0.23"
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
 
 source:
-  fn: billiard-3.3.0.23.tar.gz
-  url: https://pypi.python.org/packages/64/a6/d7b6fb7bd0a4680a41f1d4b27061c7b768c673070ba8ac116f865de4e7ca/billiard-3.3.0.23.tar.gz
-  md5: 6ee416e1e7c8d8164ce29d7377cca6a4
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
 
 build:
-  script: pip install --no-deps .
+  script: $PYTHON setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
     - python
+    - setuptools
   run:
     - python
+    - setuptools
 
 test:
-  # Python imports
   imports:
     - billiard
     - billiard.dummy
-    - billiard.py2
-    - billiard.tests
-    - funtests
 
 about:
   home: http://github.com/celery/billiard
-  license: BSD License
-  summary: 'Python multiprocessing fork with improvements and bugfixes'
-  license_family: BSD
+  summary: Python multiprocessing fork with improvements and bugfixes
+  license: BSD
+  license_file: LICENSE.txt
