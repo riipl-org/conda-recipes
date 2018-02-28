@@ -1,9 +1,5 @@
 #!/bin/bash
-if [ $(uname) == "Darwin" ]
-then
-  ./configure --prefix=$PREFIX --disable-Bsymbolic
-else
-  ./configure --prefix=$PREFIX
-fi
+set -e
+./configure --prefix=$PREFIX
 make
 make install
