@@ -10,14 +10,15 @@ source:
   url: https://gnupg.org/ftp/gcrypt/libgpg-error/{{ name }}-{{ version }}.tar.bz2
   sha256: {{ sha256 }}
 
+build:
+  number: 1
+
 requirements:
   build:
-    - gcc ==5.4.0
-  run:
-    - libgcc >=5.4.0
+    - {{ compiler('c') }}
 
 about:
   home: https://gnupg.org/software/index.html
-  license: GPL-2.0
-  license_family: GPL
-  summary: 'a small library that originally defined common error values for all GnuPG components'
+  summary: a small library that originally defined common error values for all GnuPG components
+  license: GPLv2
+  license_file: COPYING
