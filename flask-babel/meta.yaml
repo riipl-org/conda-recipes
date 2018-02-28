@@ -1,6 +1,6 @@
 package:
   name: flask-babel
-  version: "0.11.1"
+  version: 0.11.1
 
 source:
   fn: Flask-Babel-0.11.1.tar.gz
@@ -8,27 +8,29 @@ source:
   md5: 658e84a20ddc545a7612144fe2c758d3
 
 build:
-  script: pip install --no-deps .
+  number: 1
+  script: $PYTHON setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
     - python
-    - flask ==0.12.2
-    - babel ==2.5.0
-    - jinja2 ==2.9.6
+    - setuptools
+    - flask >=0.12.2
+    - babel >=2.5.0
+    - jinja2 >=2.9.6
   run:
     - python
-    - flask ==0.12.2
-    - babel ==2.5.0
-    - jinja2 ==2.9.6
+    - setuptools
+    - flask >=0.12.2
+    - babel >=2.5.0
+    - jinja2 >=2.9.6
 
 test:
-  # Python imports
   imports:
     - flask_babel
 
 about:
   home: http://github.com/python-babel/flask-babel
-  license: BSD License
-  summary: 'Adds i18n/l10n support to Flask applications'
-  license_family: BSD
+  summary: Adds i18n/l10n support to Flask applications
+  license: BSD
+  license_file: LICENSE
