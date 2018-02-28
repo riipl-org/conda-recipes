@@ -5,12 +5,15 @@ package:
 source:
   fn: p7zip-16.02.tar.bz2
   url: https://downloads.sourceforge.net/project/p7zip/p7zip/16.02/p7zip_16.02_src_all.tar.bz2
+  sha256: 5eb20ac0e2944f6cb9c2d51dd6c4518941c185347d4089ea89087ffdd6e2341f
+
+build:
+  number: 1
 
 requirements:
   build:
-    - gcc 5.4.0
-  run:
-    - libgcc >=5.4.0
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
 
 test:
   commands:
@@ -18,5 +21,5 @@ test:
 
 about:
   home: http://p7zip.sourceforge.net
+  summary: 7Zip for POSIX systems
   license: LGPLv2
-  summary: "7Zip for POSIX systems"
