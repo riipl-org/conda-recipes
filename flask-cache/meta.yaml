@@ -1,6 +1,6 @@
 package:
   name: flask-cache
-  version: "0.13.1"
+  version: 0.13.1
 
 source:
   fn: Flask-Cache-0.13.1.tar.gz
@@ -8,23 +8,25 @@ source:
   md5: ab82a9cd0844891ccdb54fbb93fd6c59
 
 build:
-  script: pip install --no-deps .
+  number: 1
+  script: $PYTHON setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
     - python
-    - flask ==0.12.2
+    - setuptools
+    - flask >=0.12.2
   run:
     - python
-    - flask ==0.12.2
+    - setuptools
+    - flask >=0.12.2
 
 test:
-  # Python imports
   imports:
     - flask_cache
 
 about:
   home: http://github.com/thadeusb/flask-cache
-  license: BSD License
-  summary: 'Adds cache support to your Flask application'
-  license_family: BSD
+  summary: Adds cache support to your Flask application
+  license: BSD
+  license_file: LICENSE
