@@ -1,0 +1,31 @@
+package:
+  name: r-dbi
+  version: 3.4.3
+
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  host:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
+    - r-base
+    - r-tidyverse
+    - mysql
+    - postgresql
+    - sqlite
+  run:
+    - r-base
+    - r-tidyverse
+    - mysql
+    - postgresql
+    - sqlite
+
+about:
+  home: https://www.r-dbi.org
+  summary: R packages for database interfaces
+  license: Various

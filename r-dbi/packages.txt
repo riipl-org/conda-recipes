@@ -1,0 +1,7 @@
+bigrquery
+DBItest
+RMariaDB
+RMySQL
+ROracle
+RPostgres
+RSQLite
