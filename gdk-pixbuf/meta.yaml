@@ -7,7 +7,7 @@ source:
   sha256: ae62ab87250413156ed72ef756347b10208c00e76b222d82d9ed361ed9dde2f3
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -17,7 +17,6 @@ requirements:
   host:
     - cairo
     - glib
-    - gobject-introspection
     - jpeg
     - libffi
     - libpng
@@ -29,7 +28,6 @@ requirements:
   run:
     - cairo
     - glib
-    - gobject-introspection
     - jpeg
     - libffi
     - libpng
