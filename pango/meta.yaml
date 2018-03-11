@@ -1,0 +1,28 @@
+package:
+  name: pango
+  version: 1.40.14
+
+source:
+  url: http://ftp.gnome.org/pub/gnome/sources/pango/1.40/pango-1.40.14.tar.xz
+  md5: 18d7eb8d52e7e445e733c109ddaa7b78
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - xz
+  host:
+    - cairo
+    - harfbuzz
+    - glib
+    - libpng
+  run:
+    - cairo
+    - harfbuzz
+    - glib
+    - libpng
+
+about:
+  home: http://www.pango.org/
+  summary: Text layout and rendering engine
+  license: LGPL
+  license_file: COPYING
