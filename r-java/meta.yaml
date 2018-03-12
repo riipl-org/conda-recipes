@@ -1,0 +1,37 @@
+{% set version = '0.9-9' %}
+
+package:
+  name: r-java
+  version: {{ version|replace("-", "_") }}
+
+source:
+  fn: rJava_{{ version }}.tar.gz
+  url:
+    - https://cran.r-project.org/src/contrib/rJava_{{ version }}.tar.gz
+    - https://cran.r-project.org/src/contrib/Archive/rJava/rJava_{{ version }}.tar.gz
+  sha256: 932b153f2b5c546d614bb5ac4124df3d103c9f8e09a608a14fd036dfe15e9146
+
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  host:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
+    - r-base
+  run:
+    - r-base
+
+test:
+  commands:
+    - $R -e "library('rJava')"
+
+about:
+  home: http://www.rforge.net/rJava/
+  summary: Low-level interface to Java VM very much like .C/.Call and friends. Allows creation
+    of objects, calling methods and accessing fields.
+  license: GPLv2
