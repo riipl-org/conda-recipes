@@ -1,4 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/bash
+set -e 
+
 # inspired by build script for Arch Linux fftw pacakge:
 # https://projects.archlinux.org/svntogit/packages.git/tree/trunk/PKGBUILD?h=packages/fftw
 
@@ -6,17 +8,17 @@ CONFIGURE="./configure --prefix=$PREFIX --enable-shared --enable-threads --disab
 
 # Single precision (fftw libraries have "f" suffix)
 $CONFIGURE --enable-float --enable-sse --enable-avx
-make
+make -j${CPU_COUNT}
 make install
 
 # Long double precision (fftw libraries have "l" suffix)
 $CONFIGURE --enable-long-double
-make
+make -j${CPU_COUNT}
 make install
 
 # Double precision (fftw libraries have no precision suffix)
 $CONFIGURE --enable-sse2 --enable-avx
-make
+make -j${CPU_COUNT}
 make install
 
 # Test suite
