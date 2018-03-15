@@ -1,0 +1,25 @@
+package:
+  name: r-machinelearning
+  version: 3.4.3
+
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  host:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
+    - r-base
+    - r-essentials
+  run:
+    - r-base
+    - r-essentials
+
+about:
+  home: https://cran.r-project.org/view=MachineLearning
+  summary: "CRAN Task View: Machine Learning & Statistical Learning"
+  license: Various
