@@ -1,0 +1,34 @@
+package:
+  name: r-essentials
+  version: 3.4.3
+
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - pkg-config
+  host:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
+    - r-base
+    - gmp
+    - gsl
+    - libxml2
+    - nlopt
+    - udunits2
+  run:
+    - r-base
+    - gmp
+    - gsl
+    - libxml2
+    - nlopt
+    - udunits2
+
+about:
+  summary: Common dependencies for other R packages
+  license: Various
