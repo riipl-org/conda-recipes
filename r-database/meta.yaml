@@ -1,5 +1,5 @@
 package:
-  name: r-dbi
+  name: r-database
   version: 3.4.3
 
 build:
@@ -14,18 +14,17 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
     - r-base
-    - r-tidyverse
+    - r-essentials
     - mysql
     - postgresql
     - sqlite
   run:
     - r-base
-    - r-tidyverse
+    - r-essentials
     - mysql
     - postgresql
     - sqlite
 
 about:
-  home: https://www.r-dbi.org
   summary: R packages for database interfaces
   license: Various
