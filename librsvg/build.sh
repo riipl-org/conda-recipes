@@ -1,19 +1,13 @@
 #!/bin/bash
-if [ $(uname) == "Darwin" ]; then
-  export LDFLAGS=$LDFLAGS" -L$PREFIX/lib -Wl,-rpath,$PREFIX/lib"
-  export CFLAGS=$CFLAGS" -I${PREFIX}/include"
-  ./configure \
-      --prefix=$PREFIX \
-      --disable-Bsymbolic \
-      --enable-tools=yes \
-      --enable-pixbuf-loader=yes \
-      --enable-introspection=yes
-else
-  ./configure \
-      --prefix=$PREFIX \
-      --enable-tools=yes \
-      --enable-pixbuf-loader=yes \
-      --enable-introspection=yes
-fi
+set -e
+
+export CFLAGS="$CFLAGS -L/usr/lib64 -Wl,-L/usr/lib64"
+export LD_LIBRARY_PATH=/usr/lib64
+
+./configure --prefix=$PREFIX \
+            --enable-tools=yes \
+            --enable-pixbuf-loader=yes \
+            --enable-introspection=no \
+            --enable-gtk-doc=no
 make
 make install

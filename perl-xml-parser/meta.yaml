@@ -1,0 +1,52 @@
+{% set name = "perl-xml-parser" %}
+{% set version = "2.44" %}
+{% set sha256 = "1ae9d07ee9c35326b3d9aad56eae71a6730a73a116b9fe9e8a4758b7cc033216" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  fn: XML-Parser-2.44.tar.gz
+  url: https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.44.tar.gz
+  sha256: {{ sha256 }}
+
+# If this is a new build for the same version, increment the build
+# number. If you do not include this key, it defaults to 0.
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - {{ compiler('c') }}
+    - perl-extutils-makemaker
+    - expat
+    - perl
+  run:
+    - expat
+    - perl
+
+test:
+  # Perl 'use' tests
+  imports:
+    - XML::Parser
+    - XML::Parser::Expat
+    - XML::Parser::Style::Debug
+    - XML::Parser::Style::Objects
+    - XML::Parser::Style::Stream
+    - XML::Parser::Style::Subs
+    - XML::Parser::Style::Tree
+
+  # You can also put a file called run_test.pl (or run_test.py) in the recipe
+  # that will be run at test time.
+
+about:
+  home: http://metacpan.org/pod/XML::Parser
+  license: Perl
+  summary: A perl module for parsing XML documents
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml

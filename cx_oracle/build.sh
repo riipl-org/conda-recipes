@@ -1,12 +1,6 @@
 #!/bin/bash
+set -e
 
-export ORACLE_HOME=/opt/instantclient_12_2
-echo $ORACLE_HOME
+export ORACLE_HOME=/usr/lib/oracle/12.1/client64
 
-$PYTHON setup.py install
-
-# Add more build steps here, if they are necessary.
-
-# See
-# http://docs.continuum.io/conda/build.html
-# for a list of environment variables that are set during the build process.
+python setup.py install --single-version-externally-managed --record=record.txt

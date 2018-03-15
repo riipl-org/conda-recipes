@@ -7,20 +7,30 @@ source:
   url: http://ftp.gnome.org/pub/gnome/sources/libsecret/0.18/libsecret-0.18.5.tar.xz
   md5: 2d688825921313da8731313b0a7f394c
 
+build:
+  number: 1
+
 requirements:
   build:
-    - gcc ==5.4.0
-    - intltool ==0.51.0
-    - glib ==2.53.6
-    - gobject-introspection ==1.53.5
-    - libgcrypt ==1.8.0
+    - {{ compiler('c') }}
+    - xz
+  host:
+    - glib
+    - gobject-introspection
+    - libffi
+    - libgcrypt
+    - pcre
+    - zlib
   run:
-    - libgcc >=5.4.0
-    - glib ==2.53.6
-    - gobject-introspection ==1.53.5
-    - libgcrypt ==1.8.0
+    - glib
+    - gobject-introspection
+    - libffi
+    - libgcrypt
+    - pcre
+    - zlib
 
 about:
   home: https://wiki.gnome.org/Projects/Libsecret
-  license: LGPLv2
   summary: library for storing and retrieving passwords and other secrets
+  license: LGPLv2
+  license_file: COPYING

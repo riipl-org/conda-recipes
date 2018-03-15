@@ -9,22 +9,27 @@ source:
   url: https://download.gnome.org/sources/librsvg/2.40/librsvg-2.40.19.tar.xz
   sha256: 612b4d8b8609036f5d899be3fe70d9866b5f6ac5c971154c1c0ef7242216c1f7
 
+build:
+  number: 1
+
 requirements:
   build:
-    - gcc ==5.4.0 # [linux]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - pkg-config
-    - cairo ==1.14.10
-    - gdk-pixbuf ==2.36.11
-    - glib ==2.53.6
-    - libcroco ==0.6.12
-    - pango ==1.40.11
+    - xz
+  host:
+    - cairo
+    - gdk-pixbuf
+    - glib
+    - libcroco
+    - pango
   run:
-    - libgcc >=5.4.0 # [linux]
-    - cairo ==1.14.10
-    - gdk-pixbuf ==2.36.11
-    - glib ==2.53.6
-    - libcroco ==0.6.12
-    - pango ==1.40.11
+    - cairo
+    - gdk-pixbuf
+    - glib
+    - libcroco
+    - pango
 
 test:
   commands:
@@ -32,6 +37,6 @@ test:
 
 about:
   home: https://live.gnome.org/LibRsvg
+  summary: Library to render SVG files using Cairo
   license: LGPLv2
   license_file: COPYING
-  summary: Library to render SVG files using Cairo
