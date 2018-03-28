@@ -1,0 +1,44 @@
+{% set name = "categorical-distance" %}
+{% set version = "1.9" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "ae5eaf72048cb4253f6b851f0594a001643574dffc014d03445f9c7c30543a3e" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - numpy
+  run:
+    - python
+    - numpy
+
+test:
+  imports:
+    - categorical
+
+about:
+  home: https://github.com/datamade/categorical-distance
+  license: MIT License
+  license_family: MIT
+  license_file: ''
+  summary: Compare two categorical variables
+  description: UNKNOWN
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
