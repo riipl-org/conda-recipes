@@ -1,0 +1,52 @@
+{% set name = "PyLBFGS" %}
+{% set version = "0.2.0.5" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "2df73ac735ca6af8549abf224de40f611e2b5d6a64657e2f619fdcd9ae4351dd" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - python
+    - setuptools
+    - numpy
+  run:
+    - python
+    - numpy
+
+test:
+  imports:
+    - lbfgs
+
+about:
+  home: The package home page
+  license: MIT License
+  license_family: MIT
+  license_file: ''
+  summary: LBFGS and OWL-QN optimization algorithms
+  description: "PyLBFGS\n=======\n\n.. image:: https://travis-ci.org/datamade/pylbfgs.svg?branch=master\n    :target: https://travis-ci.org/datamade/pylbfgs\n\n\nThis is a Python wrapper around Naoaki Okazaki\
+    \ (chokkan)'s liblbfgs_ library\nof quasi-Newton optimization routines (limited memory BFGS and OWL-QN).\n\nThis package aims to provide a cleaner interface to the LBFGS\nalgorithm than is currently\
+    \ available in SciPy_, and to provide the\nOWL-QN algorithm to Python users.\n\n\nInstalling\n==========\nType::\n\n    pip install pylbfgs\n\n\nHacking\n=======\nType::\n\n    pip install -r requirements.txt\n\
+    \    cython lbfgs/_lowlevel.pyx\n    python setup.py build_ext -i\n\nto build PyLBFGS in-place, i.e. without installing it.\n\nTo run the test suite, make sure you have pytest_ installed, and type::\n\
+    \n    pytest tests\n\n\nAuthors\n=======\nPyLBFGS was written by Lars Buitinck.\n\nAlexis Mignon submitted a patch for error handling.\n\n\n.. _Cython: http://cython.org/\n\n.. _liblbfgs: http://chokkan.org/software/liblbfgs/\n\
+    \n.. _pytest: http://doc.pytest.org/en/latest/\n\n.. _NumPy: http://numpy.scipy.org/\n\n.. _SciPy: http://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_l_bfgs_b.html\n\n.. _setuptools:\
+    \ http://pypi.python.org/pypi/setuptools\n"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
