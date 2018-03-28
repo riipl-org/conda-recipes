@@ -1,0 +1,46 @@
+{% set name = "rlr" %}
+{% set version = "2.4.3" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "d0dda8ce127e4bf4396973ca274f35d69d8b5edbbb358b96895b6f897b14219c" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - pylbfgs
+    - future >=0.14
+  run:
+    - python
+    - pylbfgs
+    - future >=0.14
+
+test:
+  imports:
+    - rlr
+
+about:
+  home: https://github.com/dedupeio/rlr
+  license: Apache Software License
+  license_family: APACHE
+  license_file: ''
+  summary: Case weighted L2 regularized logistic regression
+  description: ''
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
