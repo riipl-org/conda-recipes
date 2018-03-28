@@ -1,0 +1,63 @@
+{% set name = "dedupe" %}
+{% set version = "1.9.1" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "9bd2e0e21a924532b4c57b886389a5462682c16860237a53f5f67e3acae47b1a" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - python
+    - setuptools
+    - affinegap
+    - categorical-distance
+    - dedupe-hcluster
+    - doublemetaphone
+    - fastcluster
+    - haversine
+    - highered
+    - levenshtein-search
+    - numpy >=1.13
+    - rlr
+    - simplecosine
+    - simplejson
+    - zope.index
+  run:
+    - python
+    - affinegap
+    - categorical-distance
+    - dedupe-hcluster
+    - doublemetaphone
+    - fastcluster
+    - haversine
+    - highered
+    - levenshtein-search
+    - numpy >=1.13
+    - rlr
+    - simplecosine
+    - simplejson
+    - zope.index
+
+test:
+  imports:
+    - dedupe
+    - dedupe.variables
+
+about:
+  home: https://github.com/dedupeio/dedupe
+  summary: A python library for accurate and scaleable data deduplication and entity-resolution
+  license: MIT
