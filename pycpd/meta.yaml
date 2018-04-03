@@ -1,0 +1,37 @@
+{% set name = "pycpd" %}
+{% set version = "0.4" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "df2c629f9150a70146c5296a0634cc2f040bd30f7d0ca77c9cd60f98545ba392" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - numpy
+  run:
+    - python
+    - numpy
+
+test:
+  imports:
+    - pycpd
+
+about:
+  home: https://github.com/siavashk/pycpd
+  license: MIT License
+  license_family: MIT
+  summary: Pure Numpy Implementation of the Coherent Point Drift Algorithm
