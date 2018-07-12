@@ -1,0 +1,44 @@
+{% set name = "simplecosine" %}
+{% set version = "1.2" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "216ae262f5e5d2daaa7740296f9308c9fc024e7d7551412c7839065748b3bf02" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - numpy
+  run:
+    - python
+    - numpy
+
+test:
+  imports:
+    - simplecosine
+
+about:
+  home: https://github.com/datamade/simplecosine
+  license: MIT License
+  license_family: MIT
+  license_file: ''
+  summary: Simple cosine distance
+  description: UNKNOWN
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''

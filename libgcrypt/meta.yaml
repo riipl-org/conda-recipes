@@ -10,13 +10,16 @@ source:
   url: https://gnupg.org/ftp/gcrypt/libgcrypt/{{ name }}-{{ version }}.tar.bz2
   sha256: {{ sha256 }}
 
+build:
+  number: 1
+
 requirements:
   build:
-    - gcc ==5.4.0
-    - libgpg-error ==1.27
+    - {{ compiler('c') }}
+  host:
+    - libgpg-error
   run:
-    - libgcc >=5.4.0
-    - libgpg-error ==1.27
+    - libgpg-error
 
 test:
   commands:
@@ -24,8 +27,6 @@ test:
 
 about:
   home: https://gnupg.org/software/index.html
+  summary: a general purpose cryptographic library originally based on code from GnuPG
   license: GPLv3
-  license_family: GPL
-  summary: 'a general purpose cryptographic library originally based on code from GnuPG.'
-
-
+  license_file: COPYING

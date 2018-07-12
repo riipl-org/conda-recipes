@@ -1,18 +1,20 @@
 package:
   name: fftw
-  version: "3.3.7"
+  version: 3.3.7
 
 source:
   url: http://fftw.org/fftw-3.3.7.tar.gz
   md5: 0d5915d7d39b3253c1cc05030d79ac47
 
+build:
+  number: 1
+
 requirements:
   build:
-    - gcc ==5.4.0
-  run:
-    - libgcc >=5.4.0
+    - {{ compiler('c') }}
 
 about:
     home: http://fftw.org
+    summary: The fastest Fourier transform in the west
     license: GPLv3
-    summary: 'The fastest Fourier transform in the west.'
+    license_file: COPYING

@@ -1,10 +1,8 @@
 #!/bin/bash
-if [ $(uname) == "Darwin" ]; then
-  export LDFLAGS=$LDFLAGS" -L$PREFIX/lib -Wl,-rpath,$PREFIX/lib"
-  export CFLAGS=$CFLAGS" -I${PREFIX}/include"
-  ./configure --prefix=$PREFIX --disable-Bsymbolic
-else
-  ./configure --prefix=$PREFIX
-fi
+set -e
+export CPATH=$PREFIX/include
+export LD_RUN_PATH=$PREFIX/lib
+export LD_LIBRARY_PATH=$PREFIX/lib
+./configure --prefix=$PREFIX
 make
 make install

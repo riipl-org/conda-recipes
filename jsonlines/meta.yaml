@@ -1,64 +1,37 @@
+{% set name = "jsonlines" %}
+{% set version = "1.2.0" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "43b8d5588a9d4862c8a4a49580e38e20ec595aee7ad6fe469b10fb83fbefde88" %}
+
 package:
-  name: jsonlines
-  version: "1.2.0"
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
 
 source:
-  fn: jsonlines-1.2.0.tar.gz
-  url: https://pypi.python.org/packages/90/cd/0beacbcfdf9b3af9e7c615cb3dba7ec4be1030d4b283e3c9717e3fd9af3c/jsonlines-1.2.0.tar.gz
-  md5: 05f0f16ed7320a6040a9c181623774de
-#  patches:
-   # List any patch files here
-   # - fix.patch
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
 
-# build:
-  # noarch_python: True
-  # preserve_egg_dir: True
-  # entry_points:
-    # Put any entry points (scripts to be generated automatically) here. The
-    # syntax is module:function.  For example
-    #
-    # - jsonlines = jsonlines:main
-    #
-    # Would create an entry point called jsonlines that calls jsonlines.main()
-
-
-  # If this is a new build for the same version, increment the build
-  # number. If you do not include this key, it defaults to 0.
-  # number: 1
+build:
+  number: 1
+  script: python setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
     - python
     - setuptools
-    - six ==1.10
-
+    - six
   run:
     - python
-    - six ==1.10
+    - six
 
 test:
-  # Python imports
   imports:
     - jsonlines
 
-  # commands:
-    # You can put test commands to be run here.  Use this to test that the
-    # entry points work.
-
-
-  # You can also put a file called run_test.py in the recipe that will be run
-  # at test time.
-
-  # requires:
-    # Put any additional test requirements here.  For example
-    # - nose
-
 about:
   home: https://github.com/wbolster/jsonlines
-  license: BSD License
-  summary: 'Library with helpers for the jsonlines file format'
-  license_family: BSD
-
-# See
-# http://docs.continuum.io/conda/build.html for
-# more information about meta.yaml
+  summary: Library with helpers for the jsonlines file format
+  license: BSD
+  license_file: LICENSE.rst

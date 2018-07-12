@@ -1,6 +1,6 @@
 package:
   name: flask-openid
-  version: "1.2.5"
+  version: 1.2.5
 
 source:
   fn: Flask-OpenID-1.2.5.tar.gz
@@ -8,21 +8,24 @@ source:
   md5: a40c63df701ec634450d03490ddfb6c1
 
 build:
-  script: pip install --no-deps .
+  number: 1
+  script: $PYTHON setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
     - python
-    - flask ==0.12.2
-    - python-openid ==2.2.5
+    - setuptools
+    - flask >=0.12.2
+    - python-openid3 >=2.2.6
 
   run:
     - python
-    - flask ==0.12.2
-    - python-openid ==2.2.5
+    - setuptools
+    - flask >=0.12.2
+    - python-openid3 >=2.2.6
 
 about:
-  home: http://github.com/mitsuhiko/flask-openid/
-  license: BSD License
-  summary: 'OpenID support for Flask'
-  license_family: BSD
+  home: http://github.com/mitsuhiko/flask-openid
+  summary: OpenID support for Flask
+  license: BSD
+  license_file: LICENSE

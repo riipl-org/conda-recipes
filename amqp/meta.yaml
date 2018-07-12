@@ -1,29 +1,37 @@
+{% set name = "amqp" %}
+{% set version = "2.2.2" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "cba1ace9d4ff6049b190d8b7991f9c1006b443a5238021aca96dd6ad2ac9da22" %}
+
 package:
-  name: amqp
-  version: "1.4.9"
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
 
 source:
-  fn: amqp-1.4.9.tar.gz
-  url: https://pypi.python.org/packages/cc/a4/f265c6f9a7eb1dd45d36d9ab775520e07ff575b11ad21156f9866da047b2/amqp-1.4.9.tar.gz
-  md5: df57dde763ba2dea25b3fa92dfe43c19
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
 
 build:
-  script: pip install --no-deps .
+  script: $PYTHON setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
     - python
+    - setuptools
+    - vine >=1.1.3
   run:
     - python
+    - setuptools
+    - vine >=1.1.3
 
 test:
-  # Python imports
   imports:
     - amqp
-    - amqp.tests
 
 about:
   home: http://github.com/celery/py-amqp
-  license: GNU Library or Lesser General Public License (LGPL) or BSD License
-  summary: 'Low-level AMQP client for Python (fork of amqplib)'
-  license_family: LGPL
+  summary: Low-level AMQP client for Python (fork of amqplib).
+  license: BSD
+  license_file: LICENSE

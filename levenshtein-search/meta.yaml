@@ -1,0 +1,37 @@
+{% set version = "1.4.4" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "8f8a6c1c092e4fc4893b191d644bfedc6387677a1a261bc8748a6d23bffdc414" %}
+
+package:
+  name: levenshtein-search
+  version: '{{ version }}'
+
+source:
+  url: https://files.pythonhosted.org/packages/e8/cd/571f477dedb479cfc30e5e45f75405ba002a9dc0b39446b06411f78073ce/Levenshtein_search-1.4.4.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - python
+    - setuptools
+  run:
+    - python
+
+about:
+  home: https://github.com/mattandahalfew/Levenshtein_search
+  license: MIT License
+  license_family: MIT
+  license_file: ''
+  summary: Search through documents for approximately matching strings
+  description: UNKNOWN
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''

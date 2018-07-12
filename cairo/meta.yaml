@@ -1,0 +1,30 @@
+package:
+  name: cairo
+  version: 1.14.8
+
+source:
+  url: http://cairographics.org/releases/cairo-1.14.8.tar.xz
+  md5: 4ef0db2eacb271c74f8a3fd87822aa98
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - xz
+  host:
+    - freetype
+    - fontconfig
+    - pixman
+    - libpng
+    - zlib
+  run:
+    - freetype
+    - fontconfig
+    - pixman
+    - libpng
+    - zlib
+
+about:
+  home: http://cairographics.org/
+  summary: A 2D graphics library with support for multiple output devices
+  license: LGPL
+  license_file: COPYING

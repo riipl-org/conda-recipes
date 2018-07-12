@@ -1,0 +1,30 @@
+package:
+  name: r-database
+  version: 3.4.3
+
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  host:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
+    - r-base
+    - r-essentials
+    - mysql
+    - postgresql
+    - sqlite
+  run:
+    - r-base
+    - r-essentials
+    - mysql
+    - postgresql
+    - sqlite
+
+about:
+  summary: R packages for database interfaces
+  license: Various

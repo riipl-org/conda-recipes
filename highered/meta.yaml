@@ -1,0 +1,46 @@
+{% set name = "highered" %}
+{% set version = "0.2.1" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "5fcae90599dda98560d6f5347ff88aee56a4b8e7181d009852c3dc699c336fb7" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - numpy
+    - pyhacrf-datamade >=0.2.0
+  run:
+    - python
+    - numpy
+    - pyhacrf-datamade >=0.2.0
+
+test:
+  imports:
+    - highered
+
+about:
+  home: https://github.com/datamade/highered
+  license: MIT License
+  license_family: MIT
+  license_file: ''
+  summary: Learnable Edit Distance Using PyHacrf
+  description: UNKNOWN
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''

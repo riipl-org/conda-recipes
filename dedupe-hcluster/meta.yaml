@@ -1,0 +1,50 @@
+{% set name = "dedupe-hcluster" %}
+{% set version = "0.3.2" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "771cc27b56b6ca9eeb1d8966dcdb72347ea9a99e8a59c7ab0edaf9b60fa7f895" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - python
+    - setuptools
+    - future
+    - numpy
+  run:
+    - python
+    - future
+    - numpy
+
+test:
+  imports:
+    - hcluster
+
+about:
+  home: https://github.com/datamade/hcluster
+  license: BSD License
+  license_family: BSD
+  license_file: ''
+  summary: Hierarchical Clustering Algorithms (Information Theory)
+  description: "This library provides Python functions for hierarchical clustering. Its features\ninclude\n\n    * generating hierarchical clusters from distance matrices\n    * computing distance matrices\
+    \ from observation vectors\n    * computing statistics on clusters\n    * cutting linkages to generate flat clusters\n    * and visualizing clusters with dendrograms.\n\nThe interface is very similar\
+    \ to MATLAB's Statistics Toolbox API to make code\neasier to port from MATLAB to Python/Numpy. The core implementation of this\nlibrary is in C for efficiency."
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''

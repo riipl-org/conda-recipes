@@ -1,0 +1,30 @@
+package:
+  name: harfbuzz
+  version: 1.4.2
+
+source:
+  url: http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-1.4.2.tar.bz2
+  md5: 27d9c3c1df0f3626b79f899a7c9bd8a7
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - freetype
+    - cairo
+    - glib
+    - libpng
+    - zlib
+  run:
+    - freetype
+    - cairo
+    - glib
+    - libpng
+    - zlib
+
+about:
+  home: http://harfbuzz.org
+  summary: HarfBuzz is an OpenType text shaping engine
+  license: MIT
+  license_file: COPYING

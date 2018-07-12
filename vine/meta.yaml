@@ -1,0 +1,35 @@
+{% set name = "vine" %}
+{% set version = "1.1.4" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "52116d59bc45392af9fdd3b75ed98ae48a93e822cee21e5fda249105c59a7a72" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  script: $PYTHON setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  build:
+    - python
+    - setuptools
+  run:
+    - python
+    - setuptools
+
+test:
+  imports:
+    - vine
+
+about:
+  home: http://github.com/celery/vine
+  summary: Python promises
+  license: BSD
+  license_file: LICENSE

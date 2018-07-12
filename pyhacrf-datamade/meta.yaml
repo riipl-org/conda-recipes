@@ -1,0 +1,60 @@
+{% set name = "pyhacrf-datamade" %}
+{% set version = "0.2.1" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "70491393007b7df70ffecc3c6b9c3d81340de9140c34816cced94e80698e72ec" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - python
+    - setuptools
+    - pylbfgs
+  run:
+    - python
+    - pylbfgs
+
+test:
+  imports:
+    - pyhacrf
+
+about:
+  home: https://github.com/datamade/pyhacrf
+  license: BSD License
+  license_family: BSD
+  license_file: ''
+  summary: Hidden alignment conditional random field, a discriminative string edit distance
+  description: "pyhacrf\n=======\n.. image:: https://travis-ci.org/datamade/pyhacrf.svg?branch=master\n    :target: https://travis-ci.org/datamade/pyhacrf\n    \n.. image:: https://ci.appveyor.com/api/projects/status/kibqrd7wnsk2ilpf/branch/master?svg=true\n\
+    \    :target: https://ci.appveyor.com/project/fgregg/pyhacrf\n\nHidden alignment conditional random field for classifying string pairs -\na learnable edit distance.\n\nThis package aims to implement\
+    \ the HACRF machine learning model with a\n``sklearn``-like interface. It includes ways to fit a model to training\nexamples and score new example.\n\nThe model takes string pairs as input and classify\
+    \ them into any number\nof classes. In McCallum's original paper the model was applied to the\ndatabase deduplication problem. Each database entry was paired with\nevery other entry and the model then\
+    \ classified whether the pair was a\n'match' or a 'mismatch' based on training examples of matches and\nmismatches.\n\nI also tried to use it as learnable string edit distance for normalizing\nnoisy\
+    \ text. See *A Conditional Random Field for Discriminatively-trained\nFinite-state String Edit Distance* by McCallum, Bellare, and Pereira,\nand the report *Conditional Random Fields for Noisy text\
+    \ normalisation*\nby Dirko Coetsee.\n\nExample\n-------\n\n.. code:: python\n\n    from pyhacrf import StringPairFeatureExtractor, Hacrf\n\n    training_X = [('helloooo', 'hello'), # Matching examples\n\
+    \                  ('h0me', 'home'),\n                  ('krazii', 'crazy'),\n                  ('non matching string example', 'no really'), # Non-matching examples\n                  ('and another\
+    \ one', 'yep')]\n    training_y = ['match',\n                  'match',\n                  'match',\n                  'non-match',\n                  'non-match']\n\n    # Extract features\n    feature_extractor\
+    \ = StringPairFeatureExtractor(match=True, numeric=True)\n    training_X_extracted = feature_extractor.fit_transform(training_X)\n\n    # Train model\n    model = Hacrf(l2_regularization=1.0)\n    model.fit(training_X_extracted,\
+    \ training_y)\n\n    # Evaluate\n    from sklearn.metrics import confusion_matrix\n    predictions = model.predict(training_X_extracted)\n\n    print(confusion_matrix(training_y, predictions))\n   \
+    \ > [[0 3]\n    >  [2 0]]\n\n    print(model.predict_proba(training_X_extracted))\n    > [[ 0.94914812  0.05085188]\n    >  [ 0.92397711  0.07602289]\n    >  [ 0.86756034  0.13243966]\n    >  [ 0.05438812\
+    \  0.94561188]\n    >  [ 0.02641275  0.97358725]]\n\nDependencies\n------------\n\nThis package depends on ``numpy``. The LBFGS optimizer in ``pylbfgs`` is\nused, but alternative optimizers can be passed.\n\
+    \nInstall\n-------\n\nInstall by running:\n\n::\n\n    python setup.py install\n\nor from pypi:\n\n::\n\n    pip install pyhacrf\n\nDeveloping\n----------\nClone from repository, then\n\n::\n\n    pip\
+    \ install -r requirements.txt\n    cython pyhacrf/*.pyx\n    python setup.py install\n\nTo deploy to pypi, make sure you have compiled the \\*.pyx files to \\*.c"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''

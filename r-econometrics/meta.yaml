@@ -1,0 +1,25 @@
+package:
+  name: r-econometrics
+  version: 3.4.3
+
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  host:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
+    - r-base
+    - r-essentials
+  run:
+    - r-base
+    - r-essentials
+
+about:
+  home: https://CRAN.R-project.org/view=Econometrics
+  summary: "CRAN Task View: Econometrics"
+  license: Various

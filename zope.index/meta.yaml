@@ -1,0 +1,92 @@
+{% set name = "zope.index" %}
+{% set version = "4.3.0" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "c9e4b4f0f5e050d8a603368724dcd649036ec304ec8c7f5efa9a0e04caad82f1" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  host:
+    - python
+    - persistent
+    - btrees >=4.4.1
+    - setuptools
+    - six
+    - zope.interface
+  run:
+    - python
+    - persistent
+    - btrees >=4.4.1
+    - setuptools
+    - six
+    - zope.interface
+
+test:
+  imports:
+    - zope
+    - zope.index
+    - zope.index.field
+    - zope.index.keyword
+    - zope.index.text
+    - zope.index.text.tests
+    - zope.index.topic
+    - zope.index.topic.tests
+
+about:
+  home: http://github.com/zopefoundation/zope.index
+  license: Zope Public License
+  license_family: OTHER
+  license_file: ''
+  summary: Indices for using with catalog like text, field, etc.
+  description: "``zope.index``\n==============\n\n.. image:: https://img.shields.io/pypi/v/zope.index.svg\n    :target: https://pypi.python.org/pypi/zope.index/\n    :alt: Latest Version\n\n.. image:: https://travis-ci.org/zopefoundation/zope.index.png?branch=master\n\
+    \        :target: https://travis-ci.org/zopefoundation/zope.index\n\nThe ``zope.index`` package provides several indices for the Zope\ncatalog.  These include:\n\n* a field index (for indexing orderable\
+    \ values),\n\n* a keyword index,\n\n* a topic index,\n\n* a text index (with support for lexicon, splitter, normalizer, etc.)\n\n\nChanges\n=======\n\n4.3.0 (2017-04-24)\n------------------\n\n- ``None``\
+    \ are now valid values in a field index. This requires BTrees\n  >= 4.4.1.\n- Allow ``TypeError`` to propagate from a field index when the value\n  cannot be stored in a BTree. Previously it was silently\
+    \ ignored\n  because it was expected that these were usually ``None``.\n- Add support for Python 3.6. See `issue 8\n  <https://github.com/zopefoundation/zope.index/issues/8>`_.\n- Make the C implementation\
+    \ of the text index's score function\n  (``zope.text.index.okascore``) importable under Python 3. Previously\n  we would fall back to a pure-Python implementation. See `issue 14\n  <https://github.com/zopefoundation/zope.index/issues/14>`_.\n\
+      - Packaging: Distribute ``manylinux`` wheels and Windows wheels.\n\n4.2.0 (2016-06-10)\n------------------\n\n- Drop support for Python 2.6.\n\n- Add support for Python 3.5.\n\n\n4.1.0 (2014-12-27)\n\
+    ------------------\n\n- Add support for PyPy.  (PyPy3 is pending release of a fix for:\n  https://bitbucket.org/pypy/pypy/issue/1946)\n\n- Add support for Python 3.4.\n\n- Add support for testing on\
+    \ Travis.\n\n\n4.0.1 (2013-02-28)\n------------------\n\n- Add the forgotten dependency on ``six``.\n  Fixes https://github.com/zopefoundation/zope.index/issues/1.\n\n\n4.0.0 (2013-02-25)\n------------------\n\
+    \n- Add support for Python 3.3.\n\n- Replace deprecated ``zope.interface.implements`` usage with equivalent\n  ``zope.interface.implementer`` decorator.\n\n- Drop support for Python 2.4 and 2.5.\n\n\
+    3.6.4 (2012-03-12)\n------------------\n\n- Insure proper unindex behavior if index_doc is called with a empty sequence.\n\n- Use the standard Python doctest module instead of zope.testing.doctest\n\
+    \n3.6.3 (2011-12-03)\n------------------\n\n- KeywordIndex: Minor optimization; use __nonzero__ instead of __len__\n  to avoid loading the full TreeSet.\n\n3.6.2 (2011-12-03)\n------------------\n\n\
+      - KeywordIndex: Store docids in TreeSet rather than a Set when the\n  number of documents matching a word reaches a configurable\n  threshold (default 64). The rule is applied to individual words at\n\
+    \  indexing time, but you can call the new optimize method to optimize\n  all the words in an index at once. Designed to fix LP #881950.\n\n3.6.1 (2010-07-08)\n------------------\n\n- TextIndex:  reuse\
+    \ the lexicon from the underlying Okapi / Cosine\n  index, if passed.  (LP #232516)\n\n- Lexicon:  avoid raising an exception when indexing None. (LP #598776)\n\n3.6.0 (2009-08-03)\n------------------\n\
+    \n- Improve test readability and reached 100% test coverage.\n\n- Fix a broken optimization in okascore.c: it was passing a Python\n  float to the PyInt_AS_LONG() macro. This resulted in wrong scores,\n\
+    \  especially on 64 bit platforms, where all scores typically ended up\n  being zero.\n\n- Change okascore.c to produce the same results as its Python\n  equivalent, reducing the brittleness of the\
+    \ text index tests.\n\n3.5.2 (2009-06-09)\n------------------\n\n- Port okascore.c optimization used in okapiiindex from Zope2 catalog\n  implementation.  This module is compiled conditionally, based\
+    \ on\n  whether your environment has a working C compiler.\n\n- Don't use ``len(self._docweight)`` in okapiindex _search_wids method\n  (obtaining the length of a BTree is very expensive at scale).\n\
+    \  Instead use self.documentCount().  Also a Zope2 port.\n\n3.5.1 (2009-02-27)\n------------------\n\n- The baseindex, okapiindex, and lexicon used plain counters for various\n  lengths, which is unsuitable\
+    \ for production applications.\n  Backport code from Zope2 indexes which opportunistically replaces the\n  counters with BTree.Length objects.\n\n- Backport non-insane version of baseindex._del_wordinfo\
+    \ from\n  Zope2 text index.  This improves deletion performance by\n  several orders of magnitude.\n\n- Don't modify given query dictionary in the KeywordIndex.apply method.\n\n- Move FieldIndex's sorting\
+    \ functionality to a mixin class so it can\n  be reused by zc.catalog's ValueIndex.\n\n3.5.0 (2008-12-30)\n------------------\n\n- Remove zope.testing from dependencies, as it's not really needed.\n\
+    \n- Define IIndexSort interface for indexes that support sorting.\n\n- Implement sorting for FieldIndex (adapted from repoze.catalog/ZCatalog).\n\n- Add an ``apply`` method for KeywordIndex/TopicIndex,\
+    \ making them\n  implement IIndexSearch that can be useful in catalog.\n\n- Optimize the ``search`` method of KeywordIndex/TopicIndex by using\n  multiunion for the ``or`` operator and sorting before\
+    \ intersection for ``and``.\n\n- IMPORTANT: KeywordIndex/TopicIndex now use IFSets instead of IISets.\n  This makes it more compatible with other indexes (for example, when\n  using in catalog). This\
+    \ change can lead to problems, if your code somehow\n  depends on the II nature of sets, as it was before.\n\n  Also, FilteredSets used to use IFSets as well, if you have any\n  FilteredSets pickled\
+    \ in the database, you need to migrate them to\n  IFSets yourself. You can do it like that:\n\n      filter._ids = filter.family.IF.Set(filter._ids)\n\n  Where ``filter`` is an instance of FilteredSet.\n\
+    \n- IMPORTANT: KeywordIndex are now non-normalizing. Because\n  it can be useful for non-string keywords, where case-normalizing\n  doesn't make any sense. Instead, it provides the ``normalize``\n \
+    \ method that can be overriden by subclasses to provide some\n  normalization.\n\n  The CaseInsensitiveKeywordIndex class is now provided that\n  do case-normalization for string-based keywords. The\
+    \ old\n  CaseSensitiveKeywordIndex is gone, applications should use\n  KeywordIndex for that.\n\nLooks like the KeywordIndex/TopicIndex was sort of abadonware\nand wasn't used by application developers,\
+    \ so after some\ndiscussion we decided to refactor them to make them more\nusable, optimal and compatible with other indexes and catalog.\n\nPorting application from old KeywordIndex/TopicIndex to new\n\
+    ones are rather easy and explained above, so we believe that\nit isn't a problem. Please, use zope3-users@zope.org or\nzope-dev@zope.org mailing lists, if you have any problems\nwith migration.\n\n\
+    Thanks Chris McDonough of repoze for supporting and useful code.\n\n3.4.1 (2007-09-28)\n------------------\n\n- Fix bug in package metadata (wrong homepage URL).\n\n3.4.0 (2007-09-28)\n------------------\n\
+    \nNo further changes since 3.4.0a1.\n\n3.4.0a1 (2007-04-22)\n--------------------\n\nInitial release as a separate project, corresponds to zope.index from\nZope 3.4.0a1"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''

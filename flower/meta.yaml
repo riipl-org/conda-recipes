@@ -1,6 +1,6 @@
 package:
   name: flower
-  version: "0.9.1"
+  version: 0.9.1
 
 source:
   fn: flower-0.9.1.tar.gz
@@ -8,28 +8,28 @@ source:
   md5: 5d191dae0db989b97d9d000133ead843
 
 build:
-  script: pip install --no-deps .
+  number: 1
+  script: $PYTHON setup.py install --single-version-externally-managed --record=record.txt
   entry_points:
     - flower = flower.__main__:main
 
 requirements:
   build:
     - python
-    - celery ==3.1.25
-    - tornado ==4.5.2
-    - babel ==2.5.0
-    - pytz ==2017.3
-    - futures ==3.1.1
+    - setuptools
+    - celery
+    - tornado
+    - babel
+    - pytz
   run:
     - python
-    - celery ==3.1.25
-    - tornado ==4.5.2
-    - babel ==2.5.0
-    - pytz ==2017.3
-    - futures ==3.1.1
+    - setuptools
+    - celery
+    - tornado
+    - babel
+    - pytz
 
 test:
-  # Python imports
   imports:
     - flower
     - flower.api
@@ -41,6 +41,6 @@ test:
 
 about:
   home: https://github.com/mher/flower
-  license: BSD License
-  summary: 'Celery Flower'
-  license_family: BSD
+  summary: Celery Flower
+  license: BSD
+  license_file: LICENSE

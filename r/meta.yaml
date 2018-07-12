@@ -1,0 +1,22 @@
+package:
+  name: r
+  version: 3.4.3
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - r-base
+  run:
+    - r-base
+    - r-database
+    - r-essentials
+    - r-extra-1
+    - r-econometrics
+    - r-machinelearning
+    - r-spatial
+
+about:
+  summary: The RIIPL R distribution
+  license: Various
