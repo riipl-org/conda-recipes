@@ -1,0 +1,44 @@
+{% set name = "iml" %}
+{% set version = "0.6.1" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "70d9fbccab9aac526b9066bfa3db54223dbd5b260f128726799fe5ab4c88465a" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - numpy
+    - scipy
+    - ipython
+    - pandas
+  run:
+    - python
+    - numpy
+    - scipy
+    - ipython
+    - pandas
+
+test:
+  imports:
+    - iml
+  requires:
+    - nose
+
+about:
+  home: http://github.com/interpretable-ml/iml
+  license: MIT
+  summary: Interpretable Machine Learning (iML) package. Explain the predictions of any model.
