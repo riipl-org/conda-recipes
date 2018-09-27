@@ -4,11 +4,20 @@ package:
 
 source:
   url: http://cairographics.org/releases/pixman-0.34.0.tar.gz
-  md5: e80ebae4da01e77f68744319f01d52a3
+  sha1: a1b1683c1a55acce9d928fea1ab6ceb79142ddc7
+
+build:
+  number: 1
 
 requirements:
   build:
     - {{ compiler('c') }}
+  host:
+    - libpng
+    - zlib
+  run:
+    - libpng
+    - zlib
 
 about:
   home: http://www.pixman.org/
