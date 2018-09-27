@@ -1,12 +1,10 @@
 #!/bin/bash
 set -e
 
-export CPATH=$PREFIX/include
-export LD_RUN_PATH=$PREFIX/lib
-export LD_LIBRARY_PATH=$PREFIX/lib
+export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/share/pkgconfig
 
-./configure --prefix=$PREFIX \
-            --disable-gtk-doc
-make -j$CPU_COUNT
-make check
+./configure --prefix=$PREFIX --disable-introspection --disable-static
+make
 make install
+
+rm -rf $PREFIX/share/gtk-doc

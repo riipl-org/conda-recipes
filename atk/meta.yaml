@@ -1,16 +1,13 @@
-{% set major_minor = "2.25" %}
-{% set version = major_minor + ".2" %}
-
 package:
   name: atk
-  version: {{ version }}
+  version: 2.25.2
 
 source:
-  url: http://ftp.gnome.org/pub/gnome/sources/atk/{{ major_minor }}/atk-{{ version }}.tar.xz
+  url: http://ftp.gnome.org/pub/gnome/sources/atk/2.25/atk-2.25.2.tar.xz
   sha256: 75ac1f63e845f895dec8d72d4645ef5f362e32c921cc78987f2f19c2ce212a24
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -19,10 +16,8 @@ requirements:
     - xz
   host:
     - glib
-    - gobject-introspection
   run:
     - glib
-    - gobject-introspection
 
 test:
   commands:
@@ -31,5 +26,5 @@ test:
 about:
   home: http://www.gtk.org/
   summary: Accessibility Toolkit
-  license: LGPLv2
+  license: LGPL
   license_file: COPYING
