@@ -1,0 +1,19 @@
+package:
+  name: smartsvn
+  version: 9.3.1
+
+source:
+  url: https://www.smartsvn.com/downloads/smartsvn/smartsvn-linux-9_3_1.tar.gz
+  sha1: 29b954181fe0a4b005c8cfb0fb42c07f8e51ebae
+
+requirements:
+  host:
+    - svn
+  run:
+    - svn
+
+about:
+  home: https://www.smartsvn.com/
+  summary: Subversion client for OS X, Windows and Linux
+  license: SmartSVN
+  license_file: license.html
