@@ -7,7 +7,7 @@ source:
   md5: f6dcadce764605552fc956563efa058c
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -30,5 +30,5 @@ test:
 about:
   home: https://wiki.freedesktop.org/www/Software/shared-mime-info
   summary: Database of common MIME types
-  license: LGPLv2
+  license: LGPL
   license_file: COPYING
