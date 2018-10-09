@@ -1,9 +1,8 @@
 #!/bin/bash
 
-$PYTHON setup.py install 
+set -e
 
-# Add more build steps here, if they are necessary.
+wget https://github.com/datamade/probableparsing/blob/master/LICENSE
 
-# See
-# http://docs.continuum.io/conda/build.html
-# for a list of environment variables that are set during the build process.
+python setup.py install --single-version-externally-managed --record=record.txt
+
