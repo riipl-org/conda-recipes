@@ -1,0 +1,24 @@
+package:
+  name: r-extra-5
+  version: 3.4.3
+
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  host:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
+    - r-base ==3.4.3
+    - r-essentials
+  run:
+    - r-base ==3.4.3
+    - r-essentials
+
+about:
+  summary: Additional R packages that will be merged into other views in a future release
+  license: Various
